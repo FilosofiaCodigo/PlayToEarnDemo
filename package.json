@@ -1,0 +1,29 @@
+{
+  "name": "nftgame",
+  "version": "1.0.0",
+  "description": "``` npm install npm i -g lite-server # Create a .env and put your private key and RPC url following the .env.example npx truffle deploy --network rinkeby # now copy ./bruild/MyNFT.json to ./client/contracts/Contract.json cd client lite-server ```",
+  "main": "truffle-config.js",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {
+    "@openzeppelin/contracts": "^4.3.2",
+    "@truffle/hdwallet-provider": "^1.5.1",
+    "dotenv": "^10.0.0",
+    "truffle": "^5.4.17"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FilosofiaCodigo/BlockchainGameExample.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/FilosofiaCodigo/BlockchainGameExample/issues"
+  },
+  "homepage": "https://github.com/FilosofiaCodigo/BlockchainGameExample#readme"
+}
