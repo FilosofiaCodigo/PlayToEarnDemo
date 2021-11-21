@@ -1,5 +1,5 @@
 const NETWORK_ID = 4
-const JSON_CONTRACT_PATH = "./contracts/MyNFT.json"
+const JSON_CONTRACT_PATH = "./MyToken.json"
 var contract
 var accounts
 var web3
@@ -70,7 +70,7 @@ async function loadDapp() {
           accounts = await web3.eth.getAccounts()
           balance = await contract.methods.balanceOf(accounts[0]).call()
           playerBalanceCallback(balance)
-          document.getElementById("web3_message").textContent="You have " + balance + " NFTs"
+          document.getElementById("web3_message").textContent="You have " + balance + " tokens"
         };
         awaitContract();
       } else {
@@ -93,9 +93,8 @@ function httpGetAsync(theUrl, callback)
   xmlHttp.send(null);
 }
 
-const mint = async () => {
-  
-  fetch("http://localhost:8080/exchange?address=0x730bF3B67090511A64ABA060FbD2F7903536321E&points=1234")
+const exchange = async (points) => {
+  fetch(`http://localhost:8080/exchange?address=${accounts[0]}&points=${points}`)
   .then(response => {
     // indicates whether the response is successful (status code 200-299) or not
     if (!response.ok) {
@@ -108,14 +107,6 @@ const mint = async () => {
     console.log(data.products)
   })
   .catch(error => console.log(error))
-
-  /*
-  httpGetAsync('http://localhost:8080/exchange?address=0x730bF3B67090511A64ABA060FbD2F7903536321E&points=1235',
-    function(response) {
-      console.log(response)
-    }
-  )
-  */
 }
 
 loadDapp()

@@ -24,7 +24,8 @@ var cursors;
 var score = 0;
 var gameOver = false;
 var scoreText;
-var velocity = 160
+var velocity = 320
+var _this = this
 
 var game = new Phaser.Game(config);
 
@@ -35,10 +36,12 @@ function preload ()
   this.load.image('star', './assets/star.png');
   this.load.image('bomb', './assets/bomb.png');
   this.load.spritesheet('dude', './assets/dude.png', { frameWidth: 32, frameHeight: 48 });
+  this.load.image('collect', './assets/collect.png');
 }
 
 function create ()
 {
+  _this = this
   //  A simple background for our game
   this.add.image(400, 300, 'sky');
 
@@ -113,6 +116,15 @@ function create ()
   this.physics.add.overlap(player, stars, collectStar, null, this);
 
   this.physics.add.collider(player, bombs, hitBomb, null, this);
+
+  button_collect = this.add.image(170, 160, 'collect');
+
+  button_collect.setInteractive().on('pointerdown', function() {
+    button_collect.visible = false
+    exchange(score)
+  });
+
+  button_collect.visible = false
 }
 
 function update ()
@@ -157,21 +169,25 @@ function collectStar (player, star)
 
   if (stars.countActive(true) === 0)
   {
-    //  A new batch of stars to collect
-    stars.children.iterate(function (child) {
-
-        child.enableBody(true, child.x, 0, true, true);
-
-    });
-
-    var x = (player.x < 400) ? Phaser.Math.Between(400, 800) : Phaser.Math.Between(0, 400);
-
-    var bomb = bombs.create(x, 16, 'bomb');
-    bomb.setBounce(1);
-    bomb.setCollideWorldBounds(true);
-    bomb.setVelocity(Phaser.Math.Between(-200, 200), 20);
-
+    addStars()
   }
+}
+
+function addStars()
+{
+  //  A new batch of stars to collect
+  stars.children.iterate(function (child) {
+
+    child.enableBody(true, child.x, 0, true, true);
+
+  });
+
+  var x = (player.x < 400) ? Phaser.Math.Between(400, 800) : Phaser.Math.Between(0, 400);
+
+  var bomb = bombs.create(x, 16, 'bomb');
+  bomb.setBounce(1);
+  bomb.setCollideWorldBounds(true);
+  bomb.setVelocity(Phaser.Math.Between(-200, 200), 20);
 }
 
 function hitBomb (player, bomb)
@@ -183,6 +199,8 @@ function hitBomb (player, bomb)
   player.anims.play('turn');
 
   gameOver = true;
+
+  button_collect.visible = true
 }
 
 function playerBalanceCallback(balance)

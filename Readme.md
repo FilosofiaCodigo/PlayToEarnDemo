@@ -1,6 +1,6 @@
 # How to use
 
-```
+```bash
 npm install
 npm i -g lite-server
 # Create a .env and put your private key and RPC url following the .env.example
