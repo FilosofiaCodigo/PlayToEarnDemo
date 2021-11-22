@@ -62,7 +62,7 @@ async function transferCoins(address_beneficiary, amount)
 
   web3.eth.sendSignedTransaction(signedTx.rawTransaction, function(error, hash) {
     if (!error) {
-      console.log("🎉 The hash of your transaction is: ", hash, "\n Check Alchemy's Mempool to view the status of your transaction!");
+      console.log("🎉 The hash of your transaction is: ", hash, "\n");
     } else {
       console.log("❗Something went wrong while submitting your transaction:", error)
     }
