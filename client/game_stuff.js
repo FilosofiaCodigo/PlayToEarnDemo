@@ -202,12 +202,3 @@ function hitBomb (player, bomb)
 
   button_collect.visible = true
 }
-
-function playerBalanceCallback(balance)
-{
-  if(balance >= 1)
-  {
-    player.setTint(0xFFD700)
-    velocity = 320
-  }
-}

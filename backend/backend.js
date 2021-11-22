@@ -8,8 +8,8 @@ const app = express()
 dotenv.config();
 
 const JSON_CONTRACT_PATH = "./MyToken.json"
-const CONTRACT_ADDRESS = "0xe7aD879dc0d0e2AD0B6bc8A29C98409e3C943609"
-const BACKEND_WALLET_ADDRESS = "0x707e55a12557E89915D121932F83dEeEf09E5d70"
+const CONTRACT_ADDRESS = "0xCONTRACTADDRESSHERE"
+const BACKEND_WALLET_ADDRESS = "0xVAULTOWNERADDRESSHERE"
 const PORT = 8080
 var web3 = null
 var contract = null
@@ -74,7 +74,7 @@ app.get('/exchange', (req, res) => {
   var address = req.query["address"]
   var points = req.query["points"]
   var message = "Sent " + points + " tokens to " + " " + address
-  //transferCoins(address, points)
+  transferCoins(address, web3.utils.toWei(points))
   res.setHeader('Content-Type', 'application/json');
   res.send({
     "message": message

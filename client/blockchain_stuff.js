@@ -69,8 +69,7 @@ async function loadDapp() {
           await window.ethereum.request({ method: "eth_requestAccounts" })
           accounts = await web3.eth.getAccounts()
           balance = await contract.methods.balanceOf(accounts[0]).call()
-          playerBalanceCallback(balance)
-          document.getElementById("web3_message").textContent="You have " + balance + " tokens"
+          document.getElementById("web3_message").textContent="You have " + web3.utils.fromWei(balance) + " tokens"
         };
         awaitContract();
       } else {
